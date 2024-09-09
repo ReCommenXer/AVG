@@ -2867,6 +2867,7 @@ MapList = {
 }
 Main:AddDropdownLeft("Select Map",MapList,function(a)
     Map_Select = a
+    _G.SaveSrttings.Map_Select = Map_Select
     SaveSetting()
     if Map_Select == "Planet Namak" then
         Map_Select_Use = "1"
@@ -2887,6 +2888,7 @@ ActList = {
 }
 Main:AddDropdownLeft('Select Act',ActList,function(a)
     Act_Select = a
+    _G.SaveSrttings.Act_Select = Act_Select
     SaveSetting()
 end)
     ModeList = {
@@ -2895,11 +2897,13 @@ end)
     }
     Main:AddDropdownLeft('Select Mode',ModeList,function(a)
     Mode_Select = a
+    _G.SaveSrttings.Mode_Select = Mode_Select
     SaveSetting()
 end)
 
 Main:AddToggleLeft("Auto Join",Auto_Join,function(a)
     Auto_Join = a
+    _G.SaveSrttings.Auto_Join = Auto_Join
     SaveSetting()
 end)
 
@@ -2939,6 +2943,7 @@ end)
 
 Main:AddToggleLeft("Auto Frind Only",Auto_Frind_Only,function(a)
     Auto_Frind_Only = a
+    _G.SaveSrttings.Auto_Frind_Only = Auto_Frind_Only
     SaveSetting()
 end)
 
@@ -2946,14 +2951,17 @@ end)
 Main:AddSeperatorRight("Game Function")
 Main:AddToggleRight("Auto Next",Auto_Next,function(a)
     Auto_Next = a
+    _G.SaveSrttings.Auto_Next = Auto_Next
     SaveSetting()
 end)
 Main:AddToggleRight("Auto Retry",Auto_Retry,function(a)
     Auto_Retry = a
+    _G.SaveSrttings.Auto_Retry = Auto_Retry
     SaveSetting()
 end)
 Main:AddToggleRight("Auto Lobby",Auto_Lobby,function(a)
     Auto_Lobby = a
+    _G.SaveSrttings.Auto_Lobby = Auto_Lobby
     SaveSetting()
 end)
 

@@ -28,11 +28,10 @@ function loadcheck()
             end
         else
             -- สร้างไฟล์ถ้าไม่มี
-            print("File not found, creating default settings...")
             _G.SaveSrttings = {
-                Mode_Select = "Normal"
-                Act_Select = "1"
-                Map_Select = "Planet Namak" -- ค่าเริ่มต้น
+                Mode_Select = "Normal",
+                Act_Select = "1",
+                Map_Select = "Planet Namak",-- ค่าเริ่มต้น
             }
             SaveSetting()
         end

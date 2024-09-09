@@ -2792,6 +2792,15 @@ end
 	return uitab
 end
 
+------------------------------------ Function -------------------------------
+
+function Tp(Pos)
+    local NamePlayer = game.Players.LocalPlayer.Name
+     local NamePlayer = game.workspace.Characters:FindFirstChild(NamePlayer)
+     NamePlayer.HumanoidRootPart.CFrame = Pos
+    end    
+
+----------------------------- Ui Set
 local RenUi = Update:AddWindow("RebornXer Hub","10039618734",Enum.KeyCode.RightControl)
 
 local Main = RenUi:AddTab("Main","6026568198")
@@ -2818,6 +2827,13 @@ MapList = {
 }
 Main:AddDropdownLeft("Select Map",MapList,function(a)
     Map_Select = a
+    if Map_Select == "Planet Namak" then
+        Map_Select_Use = "1"
+    elseif Map_Select == "Send Village" then
+        Map_Select_Use = "2"
+    elseif Map_Select == "Double Dungean" then
+        Map_Select_Use = "3"
+    end
 end)
 ActList = {
     "1",
@@ -2847,20 +2863,27 @@ spawn(function()
     while wait() do
         pcall(function()
             if Auto_Join then
-                local args = {
-                    [1] = "Confirm",
-                    [2] = {
-                        [1] = "Story",
-                        [2] = "Stage1",
-                        [3] = "Act"..Act_Select,
-                        [4] = Mode_Select,
-                        [5] = 4,
-                        [6] = 0,
-                        [7] = false
-                    }
-                }
+                for i,v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do
+                  if v.Name == "Lobby" then
+                    if v.LobbyBanner.Banner.Main.ChoosingStage.Main.ActName.Text == "Choosing..." then
+                        Tp(v.CollisionPart.CFrame)
+                           local args = {
+                              [1] = "Confirm",
+                              [2] = {
+                                [1] = "Story",
+                                [2] = "Stage"..Map_Select_Use,
+                                [3] = "Act"..Act_Select,
+                                [4] = Mode_Select,
+                                [5] = 4,
+                                [6] = 0,
+                                [7] = false
+                                    }
+                                        }
                 
-                game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
+                             game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
+                      end
+                  end
+              end
             end
         end)
     end

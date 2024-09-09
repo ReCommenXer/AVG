@@ -1,3 +1,38 @@
+
+----------------------------------- save
+
+function loadcheck()
+    if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
+    else
+    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
+    return
+    end
+    end
+    pcall(function()
+        _G.SaveSrttings = {
+            Map_Select = "",Act_Select = "",Mode_Select = "",Auto_Join = false,Auto_Frind_Only = false,Auto_Next = false,Auto_Retry = false,Auto_Lobby = false
+        }
+    end)
+    function LoadSetting()
+    if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
+    vb = game:GetService("HttpService"):JSONDecode(readfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua"))
+    _G.SaveSrttings = vb
+    else
+    loadcheck()
+    end
+    end
+    
+    function SaveSetting()
+    if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
+    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
+    else
+    loadcheck()
+    end
+    end
+    
+    loadcheck()
+    LoadSetting()
+
 ---------------------------------------------------- Ui
 
 local ZenHub = Instance.new("ScreenGui")
@@ -2800,6 +2835,11 @@ function Tp(Pos)
      NamePlayer.HumanoidRootPart.CFrame = Pos
     end    
 
+    function Upgrade(CodeName)
+        game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Upgrade", CodeName)
+    end
+
+
 ----------------------------- Ui Set
 local RenUi = Update:AddWindow("RebornXer Hub","10039618734",Enum.KeyCode.RightControl)
 
@@ -2827,6 +2867,7 @@ MapList = {
 }
 Main:AddDropdownLeft("Select Map",MapList,function(a)
     Map_Select = a
+    SaveSetting()
     if Map_Select == "Planet Namak" then
         Map_Select_Use = "1"
     elseif Map_Select == "Send Village" then
@@ -2846,6 +2887,7 @@ ActList = {
 }
 Main:AddDropdownLeft('Select Act',ActList,function(a)
     Act_Select = a
+    SaveSetting()
 end)
     ModeList = {
         "Normal",
@@ -2853,10 +2895,12 @@ end)
     }
     Main:AddDropdownLeft('Select Mode',ModeList,function(a)
     Mode_Select = a
+    SaveSetting()
 end)
 
 Main:AddToggleLeft("Auto Join",Auto_Join,function(a)
     Auto_Join = a
+    SaveSetting()
 end)
 
 spawn(function()
@@ -2895,18 +2939,22 @@ end)
 
 Main:AddToggleLeft("Auto Frind Only",Auto_Frind_Only,function(a)
     Auto_Frind_Only = a
+    SaveSetting()
 end)
 
 -------------------------------------------------- Main Right
 Main:AddSeperatorRight("Game Function")
 Main:AddToggleRight("Auto Next",Auto_Next,function(a)
     Auto_Next = a
+    SaveSetting()
 end)
 Main:AddToggleRight("Auto Retry",Auto_Retry,function(a)
     Auto_Retry = a
+    SaveSetting()
 end)
 Main:AddToggleRight("Auto Lobby",Auto_Lobby,function(a)
     Auto_Lobby = a
+    SaveSetting()
 end)
 
 spawn(function()

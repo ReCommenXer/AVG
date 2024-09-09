@@ -2876,11 +2876,18 @@ spawn(function()
                                 [4] = Mode_Select,
                                 [5] = 4,
                                 [6] = 0,
-                                [7] = false
+                                [7] = Auto_Frind_Only
                                     }
                                         }
                 
                              game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
+                            if game:GetService("Players").localPlayer.PlayerGui.MiniLobbyInterface then
+                                local args = {
+                                    [1] = "Start"
+                                }
+                                
+                                game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
+                        
                       end
                   end
               end
@@ -2889,4 +2896,37 @@ spawn(function()
     end
 end)
 
+Main:AddToggleLeft("Auto Frind Only",Auto_Frind_Only,function(a)
+    Auto_Frind_Only = a
+end)
 
+-------------------------------------------------- Main Right
+Main:AddSeperatorRight("Game Function")
+Main:AddToggleRight("Auto Next",Auto_Next,function(a)
+    Auto_Next = a
+end)
+Main:AddToggleRight("Auto Retry",Auto_Retry,function(a)
+    Auto_Retry = a
+end)
+Main:AddToggleRight("Auto Lobby",Auto_Lobby,function(a)
+    Auto_Lobby = a
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if Auto_Next or Auto_Retry or Auto_Lobby then
+                if game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == true then
+                    if Auto_Next == true then
+                        game:GetService("ReplicatedStorage").Networking.EndScreen.VoteEvent:FireServer("Next")
+                    elseif Auto_Retry == true then
+                        game:GetService("ReplicatedStorage").Networking.EndScreen.VoteEvent:FireServer("Retry")
+                    elseif Auto_Lobby == true then
+                        game:GetService("ReplicatedStorage").Networking.TeleportEvent:FireServer("Lobby")
+
+                    end
+                end
+            end
+        end)
+    end
+end)

@@ -14,13 +14,18 @@ function loadcheck()
         }
     end)
     function LoadSetting()
-    if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
-    vb = game:GetService("HttpService"):JSONDecode(readfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua"))
-    _G.SaveSrttings = vb
-    else
-    loadcheck()
+        if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
+            -- โหลดไฟล์แล้ว JSONDecode
+            local decoded = game:GetService("HttpService"):JSONDecode(readfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua"))
+            -- ตรวจสอบว่ามีการโหลดค่า Mode_Select หรือไม่
+            _G.SaveSrttings = decoded or {} -- ถ้าโหลดไม่ได้ให้เป็นตารางว่าง
+            _G.SaveSrttings.Mode_Select = _G.SaveSrttings.Mode_Select or "Normal" -- ตั้งค่าเริ่มต้นถ้าไม่มีการบันทึก
+        else
+            -- ถ้าไฟล์ไม่มีให้สร้างใหม่
+            loadcheck()
+        end
     end
-    end
+    
     
     function SaveSetting()
         print("Saving settings...")

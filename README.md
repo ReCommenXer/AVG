@@ -2866,7 +2866,7 @@ MapList = {
     "Send Village",
     "Double Dungean"
 }
-Map_Select = _G.SaveSrttings.Map_Select
+local Map_Select = _G.SaveSrttings.Map_Select or "Planet Namak"
 Main:AddDropdownLeft("Select Map",MapList,_G.SaveSrttings.Map_Select,function(a)
     Map_Select = a
     _G.SaveSrttings.Map_Select = Map_Select
@@ -2889,7 +2889,7 @@ ActList = {
     "Infinite"
 }
 
-Act_Select = _G.SaveSrttings.Act_Select
+local Act_Select = _G.SaveSrttings.Act_Select or "1"
 Main:AddDropdownLeft('Select Act',ActList,_G.SaveSrttings.Act_Select,function(a)
     Act_Select = a
     _G.SaveSrttings.Act_Select = Act_Select
@@ -2900,7 +2900,7 @@ end)
         "Nightmare"
     }
 
-    Mode_Select = _G.SaveSrttings.Mode_Select
+   local Mode_Select = _G.SaveSrttings.Mode_Select or "Normal"
 
     Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSrttings.Mode_Select,function(a)
     Mode_Select = a

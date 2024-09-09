@@ -1,6 +1,4 @@
-print("Loaded Mode_Select: " .. tostring(Mode_Select))
 ----------------------------------- save
-
 function loadcheck()
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
     else
@@ -25,22 +23,22 @@ function loadcheck()
             end)
             
             if success then
-                print("Decoded settings: ", decoded) -- แสดงข้อมูลที่ถูกแปลงจาก JSON
                 _G.SaveSrttings = decoded
             else
-                print("Error decoding JSON: ", decoded) -- ถ้าแปลงไม่สำเร็จ
             end
         else
             -- สร้างไฟล์ถ้าไม่มี
             print("File not found, creating default settings...")
             _G.SaveSrttings = {
-                Mode_Select = "Normal" -- ค่าเริ่มต้น
+                Mode_Select = "Normal"
+                Act_Select = "1"
+                Map_Select = "Planet Namak" -- ค่าเริ่มต้น
             }
             SaveSetting()
         end
     end
     function SaveSetting()
-        print("Saving settings...")
+
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
     writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
     else
@@ -2884,7 +2882,8 @@ MapList = {
     "Send Village",
     "Double Dungean"
 }
-local Map_Select = _G.SaveSrttings.Map_Select or "Planet Namak"
+Map_Select = _G.SaveSrttings.Map_Select or "Planet Namak"
+
 Main:AddDropdownLeft("Select Map",MapList,_G.SaveSrttings.Map_Select,function(a)
     Map_Select = a
     _G.SaveSrttings.Map_Select = Map_Select
@@ -2907,7 +2906,8 @@ ActList = {
     "Infinite"
 }
 
-local Act_Select = _G.SaveSrttings.Act_Select or "1"
+Act_Select = _G.SaveSrttings.Act_Select or "1"
+
 Main:AddDropdownLeft('Select Act',ActList,_G.SaveSrttings.Act_Select,function(a)
     Act_Select = a
     _G.SaveSrttings.Act_Select = Act_Select
@@ -2920,14 +2920,11 @@ end)
 
    -- หลังจากโหลดการตั้งค่า
 Mode_Select = _G.SaveSrttings.Mode_Select or "Normal" -- ใช้ค่า "Normal" ถ้า Mode_Select เป็น nil
-print("Loaded Mode_Select: " .. tostring(Mode_Select))
-
 
     Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSrttings.Mode_Select,function(a)
     Mode_Select = a
     _G.SaveSrttings.Mode_Select = Mode_Select
     SaveSetting()
-    print("New Mode_Select: " .. tostring(Mode_Select)) -- ตรวจสอบการบันทึกใน Console
 end)
 
 Main:AddToggleLeft("Auto Join",_G.SaveSrttings.Auto_Join,function(a)

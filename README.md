@@ -2863,6 +2863,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if Auto_Join then
+                if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == false then
                 for i,v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do
                   if v.Name == "Lobby" then
                     if v.LobbyBanner.Banner.Main.ChoosingStage.Main.ActName.Text == "Choosing..." then
@@ -2881,17 +2882,16 @@ spawn(function()
                                         }
                 
                              game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
-                            if game:GetService("Players").localPlayer.PlayerGui.MiniLobbyInterface then
-                                local args = {
-                                    [1] = "Start"
-                                }
-                                
-                                game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
-                        
-                      end
                   end
               end
             end
+        elseif game:GetService("Players").localPlayer.PlayerGui:FindFirstChild("MiniLobbyInterface").Holder.Visible == true then
+            local args = {
+                [1] = "Start"
+            }
+            
+            game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
+        end
         end
         end)
     end
@@ -2917,7 +2917,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if Auto_Next or Auto_Retry or Auto_Lobby then
-                if game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == true then
+                if game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == true and game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == true then
                     if Auto_Next == true then
                         game:GetService("ReplicatedStorage").Networking.EndScreen.VoteEvent:FireServer("Next")
                     elseif Auto_Retry == true then

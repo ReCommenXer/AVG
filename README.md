@@ -2918,7 +2918,10 @@ end)
         "Nightmare"
     }
 
-   local Mode_Select = _G.SaveSrttings.Mode_Select or "Normal"
+   -- หลังจากโหลดการตั้งค่า
+Mode_Select = _G.SaveSrttings.Mode_Select or "Normal" -- ใช้ค่า "Normal" ถ้า Mode_Select เป็น nil
+print("Loaded Mode_Select: " .. tostring(Mode_Select))
+
 
     Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSrttings.Mode_Select,function(a)
     Mode_Select = a

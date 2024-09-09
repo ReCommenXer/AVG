@@ -1420,8 +1420,8 @@ Truea.Name = "Truea"
 		
 
 		
-		function main:AddDropdownLeft(droptitle, list, callback)
--- Local --
+		function main:AddDropdownLeft(droptitle, list, config, callback)
+local config = config or ""
 local dropfunc = {}
 local list = list or {}
 local DropToggled = false
@@ -1524,7 +1524,7 @@ DropTextList.BackgroundTransparency = 1.000
 DropTextList.Position = UDim2.new(0, 3, 0, 30)
 DropTextList.Size = UDim2.new(0, 278, 0, 25)
 DropTextList.Font = Enum.Font.Code
-DropTextList.Text = v or "Select First"
+DropTextList.Text = v or config or"Select First"
 DropTextList.TextColor3 = Color3.fromRGB(255,255,255)
 DropTextList.TextSize = 12.000
 DropTextList.TextXAlignment = Enum.TextXAlignment.Center
@@ -1734,8 +1734,9 @@ end
 return dropfunc
 end
 
-	function main:AddDropdownRight(droptitle, list, callback1)
+	function main:AddDropdownRight(droptitle, list,  config, callback1)
 -- Local --
+local config = config or ""
 local dropfunc1 = {}
 local list = list or {}
 local DropToggled1 = false
@@ -1838,7 +1839,7 @@ DropTextList1.BackgroundTransparency = 1.000
 DropTextList1.Position = UDim2.new(0, 3, 0, 30)
 DropTextList1.Size = UDim2.new(0, 278, 0, 25)
 DropTextList1.Font = Enum.Font.Code
-DropTextList1.Text = v or "Select First"
+DropTextList1.Text = v or config or "Select First"
 DropTextList1.TextColor3 = Color3.fromRGB(255,255,255)
 DropTextList1.TextSize = 12.000
 DropTextList1.TextXAlignment = Enum.TextXAlignment.Center
@@ -2865,7 +2866,7 @@ MapList = {
     "Send Village",
     "Double Dungean"
 }
-Main:AddDropdownLeft("Select Map",MapList,function(a)
+Main:AddDropdownLeft("Select Map",MapList,_G.SaveSrttings.Map_Select,function(a)
     Map_Select = a
     _G.SaveSrttings.Map_Select = Map_Select
     SaveSetting()
@@ -2886,7 +2887,7 @@ ActList = {
     "6",
     "Infinite"
 }
-Main:AddDropdownLeft('Select Act',ActList,function(a)
+Main:AddDropdownLeft('Select Act',ActList,_G.SaveSrttings.Act_Select,function(a)
     Act_Select = a
     _G.SaveSrttings.Act_Select = Act_Select
     SaveSetting()
@@ -2895,7 +2896,7 @@ end)
         "Normal",
         "Nightmare"
     }
-    Main:AddDropdownLeft('Select Mode',ModeList,function(a)
+    Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSrttings.Mode_Select,function(a)
     Mode_Select = a
     _G.SaveSrttings.Mode_Select = Mode_Select
     SaveSetting()

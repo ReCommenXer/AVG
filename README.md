@@ -2865,7 +2865,7 @@ MapList = {
     "Send Village",
     "Double Dungean"
 }
-Main:AddDropdownLeft("Select Map",MapList,function(a)
+Main:AddDropdownLeft("Select Map",MapList,_G.SaveSrttings.Map_Select,function(a)
     Map_Select = a
     _G.SaveSrttings.Map_Select = Map_Select
     SaveSetting()
@@ -2886,7 +2886,7 @@ ActList = {
     "6",
     "Infinite"
 }
-Main:AddDropdownLeft('Select Act',ActList,function(a)
+Main:AddDropdownLeft('Select Act',ActList,_G.SaveSrttings.Act_Select,function(a)
     Act_Select = a
     _G.SaveSrttings.Act_Select = Act_Select
     SaveSetting()
@@ -2895,7 +2895,7 @@ end)
         "Normal",
         "Nightmare"
     }
-    Main:AddDropdownLeft('Select Mode',ModeList,function(a)
+    Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSrttings.Mode_Select,function(a)
     Mode_Select = a
     _G.SaveSrttings.Mode_Select = Mode_Select
     SaveSetting()

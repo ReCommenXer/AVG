@@ -1,8 +1,8 @@
 ----------------------------------- save
 function loadcheck()
-    if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
+    if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then
     else
-    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
+    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
     return
     end
     end
@@ -12,9 +12,9 @@ function loadcheck()
         }
     end)
     function LoadSetting()
-        if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
+        if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then
             -- โหลดไฟล์
-            local fileContent = readfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua")
+            local fileContent = readfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json")
             print("Loaded file content: ", fileContent) -- ตรวจสอบเนื้อหาของไฟล์
             
             -- แปลงไฟล์จาก JSON
@@ -38,8 +38,8 @@ function loadcheck()
     end
     function SaveSetting()
 
-    if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
-    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
+    if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then
+    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
     else
     loadcheck()
     end

@@ -2842,7 +2842,7 @@ ActList = {
     "4",
     "5",
     "6",
-    "Infinity"
+    "Infinite"
 }
 Main:AddDropdownLeft('Select Act',ActList,function(a)
     Act_Select = a
@@ -2892,6 +2892,7 @@ spawn(function()
                   end
               end
             end
+        end
         end)
     end
 end)

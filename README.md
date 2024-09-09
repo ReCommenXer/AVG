@@ -15,18 +15,30 @@ function loadcheck()
     end)
     function LoadSetting()
         if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
-            -- โหลดไฟล์แล้ว JSONDecode
-            local decoded = game:GetService("HttpService"):JSONDecode(readfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua"))
-            -- ตรวจสอบว่ามีการโหลดค่า Mode_Select หรือไม่
-            _G.SaveSrttings = decoded or {} -- ถ้าโหลดไม่ได้ให้เป็นตารางว่าง
-            _G.SaveSrttings.Mode_Select = _G.SaveSrttings.Mode_Select or "Normal" -- ตั้งค่าเริ่มต้นถ้าไม่มีการบันทึก
+            -- โหลดไฟล์
+            local fileContent = readfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua")
+            print("Loaded file content: ", fileContent) -- ตรวจสอบเนื้อหาของไฟล์
+            
+            -- แปลงไฟล์จาก JSON
+            local success, decoded = pcall(function()
+                return game:GetService("HttpService"):JSONDecode(fileContent)
+            end)
+            
+            if success then
+                print("Decoded settings: ", decoded) -- แสดงข้อมูลที่ถูกแปลงจาก JSON
+                _G.SaveSrttings = decoded
+            else
+                print("Error decoding JSON: ", decoded) -- ถ้าแปลงไม่สำเร็จ
+            end
         else
-            -- ถ้าไฟล์ไม่มีให้สร้างใหม่
-            loadcheck()
+            -- สร้างไฟล์ถ้าไม่มี
+            print("File not found, creating default settings...")
+            _G.SaveSrttings = {
+                Mode_Select = "Normal" -- ค่าเริ่มต้น
+            }
+            SaveSetting()
         end
     end
-    
-    
     function SaveSetting()
         print("Saving settings...")
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then

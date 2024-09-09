@@ -2886,11 +2886,7 @@ spawn(function()
               end
             end
         elseif game:GetService("Players").localPlayer.PlayerGui:FindFirstChild("MiniLobbyInterface").Holder.Visible == true then
-            local args = {
-                [1] = "Start"
-            }
-            
-            game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
+            game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Start")
         end
         end
         end)

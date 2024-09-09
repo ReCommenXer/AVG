@@ -1,4 +1,4 @@
-
+print("Loaded Mode_Select: " .. tostring(Mode_Select))
 ----------------------------------- save
 
 function loadcheck()
@@ -23,6 +23,7 @@ function loadcheck()
     end
     
     function SaveSetting()
+        print("Saving settings...")
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua") then
     writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".lua",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
     else
@@ -2906,6 +2907,7 @@ end)
     Mode_Select = a
     _G.SaveSrttings.Mode_Select = Mode_Select
     SaveSetting()
+    print("New Mode_Select: " .. tostring(Mode_Select)) -- ตรวจสอบการบันทึกใน Console
 end)
 
 Main:AddToggleLeft("Auto Join",_G.SaveSrttings.Auto_Join,function(a)

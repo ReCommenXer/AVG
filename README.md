@@ -2901,7 +2901,7 @@ end)
     SaveSetting()
 end)
 
-Main:AddToggleLeft("Auto Join",Auto_Join,function(a)
+Main:AddToggleLeft("Auto Join",_G.SaveSrttings.Auto_Join,function(a)
     Auto_Join = a
     _G.SaveSrttings.Auto_Join = Auto_Join
     SaveSetting()
@@ -2941,7 +2941,7 @@ spawn(function()
     end
 end)
 
-Main:AddToggleLeft("Auto Frind Only",Auto_Frind_Only,function(a)
+Main:AddToggleLeft("Auto Frind Only",_G.SaveSrttings.Auto_Frind_Only ,function(a)
     Auto_Frind_Only = a
     _G.SaveSrttings.Auto_Frind_Only = Auto_Frind_Only
     SaveSetting()
@@ -2949,17 +2949,17 @@ end)
 
 -------------------------------------------------- Main Right
 Main:AddSeperatorRight("Game Function")
-Main:AddToggleRight("Auto Next",Auto_Next,function(a)
+Main:AddToggleRight("Auto Next",_G.SaveSrttings.Auto_Next,function(a)
     Auto_Next = a
     _G.SaveSrttings.Auto_Next = Auto_Next
     SaveSetting()
 end)
-Main:AddToggleRight("Auto Retry",Auto_Retry,function(a)
+Main:AddToggleRight("Auto Retry", _G.SaveSrttings.Auto_Retry,function(a)
     Auto_Retry = a
     _G.SaveSrttings.Auto_Retry = Auto_Retry
     SaveSetting()
 end)
-Main:AddToggleRight("Auto Lobby",Auto_Lobby,function(a)
+Main:AddToggleRight("Auto Lobby",_G.SaveSrttings.Auto_Lobby,function(a)
     Auto_Lobby = a
     _G.SaveSrttings.Auto_Lobby = Auto_Lobby
     SaveSetting()

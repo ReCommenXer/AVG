@@ -2809,14 +2809,14 @@ Main:AddLabelLeft("Day : "..Date)
 Main:AddLineLeft("")
 
   --------------------------------------------------- Main Left function --------------
-AddSeperatorLeft("Join Map")
+Main:AddSeperatorLeft("Join Map")
 
 MapList = {
     "Planet Namak",
     "Send Village",
     "Double Dungean"
 }
-AddDropdownLeft("Select Map",MapList,function(a)
+Main:AddDropdownLeft("Select Map",MapList,function(a)
     Map_Select = a
 end)
 ActList = {
@@ -2828,18 +2828,18 @@ ActList = {
     "6",
     "Infinity"
 }
-AddDropdownLeft('Select Act',ActList,function(a)
+Main:AddDropdownLeft('Select Act',ActList,function(a)
     Act_Select = a
 end)
     ModeList = {
         "Normal",
         "Nightmare"
     }
-AddDropdownLeft('Select Mode',ModeList,function(a)
+    Main:AddDropdownLeft('Select Mode',ModeList,function(a)
     Mode_Select = a
 end)
 
-AddToggleLeft("Auto Join",Auto_Join,function(a)
+Main:AddToggleLeft("Auto Join",Auto_Join,function(a)
     Auto_Join = a
 end)
 

@@ -2928,7 +2928,7 @@ Main:AddToggleLeft("Auto Join",_G.SaveSettings.Auto_Join,function(a)
 end)
 
 spawn(function()
-    while wait() do
+    while wait(1) do
         pcall(function()
             if Auto_Join then
                 if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == false then

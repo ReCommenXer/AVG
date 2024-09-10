@@ -3025,7 +3025,33 @@ Main:AddToggleRight("White Screen [Reduce GPU]",_G.SaveSettings.White_Screen,fun
 	end
 end)
 
---------------------------------------------------------------------- Dev function
+Main:AddToggleRight("Remove Map",_G.SaveSettings.Remove_Map,function(a)
+	Remove_Map = a 
+	_G.SaveSettings.Remove_Map = Remove_Map
+	SaveSetting()
+end)
+
+spawn(function()
+	while wait() do
+		pcall(function()
+			if _G.SaveSettings.Remove_Map then
+				local map = game:GetService("Workspace").Map
+
+-- วนลูปลูกทั้งหมดของ Map
+for _, obj in pairs(map:GetChildren()) do
+    -- ถ้าวัตถุไม่ใช่ SpawnLocation ให้ทำการลบ
+    if not obj:IsA("SpawnLocation") then
+        obj:Destroy()
+		map.SpawnLocation.CanCollide = true
+    end
+end
+end
+end)
+end
+end)
+	
+	
+	--------------------------------------------------------------------- Dev function
 
 Setting:AddToggleLeft("สร้างมาชั้วคราว",_G.SaveSettings.Beta,function(a)
 	Beta = a 

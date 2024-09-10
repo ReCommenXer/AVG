@@ -1,3 +1,4 @@
+repeat wait() until game:IsLoaded()
 ----------------------------------- save
 function loadcheck()
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then
@@ -45,8 +46,6 @@ function loadcheck()
     end
     end
     
-    loadcheck()
-    LoadSetting()
 
 ---------------------------------------------------- Ui
 
@@ -3007,3 +3006,6 @@ spawn(function()
         end)
     end
 end)
+
+loadcheck()
+LoadSetting()

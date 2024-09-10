@@ -1,4 +1,3 @@
-repeat wait() until game:IsLoaded()
 ----------------------------------- save
 function loadcheck()
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then
@@ -28,12 +27,6 @@ function loadcheck()
             else
             end
         else
-            -- สร้างไฟล์ถ้าไม่มี
-            _G.SaveSrttings = {
-                Mode_Select = "Normal",
-                Act_Select = "1",
-                Map_Select = "Planet Namak",-- ค่าเริ่มต้น
-            }
             SaveSetting()
         end
     end
@@ -46,6 +39,8 @@ function loadcheck()
     end
     end
     
+    loadcheck()
+    LoadSetting()
 
 ---------------------------------------------------- Ui
 
@@ -2876,25 +2871,25 @@ Main:AddLineLeft("")
 Main:AddSeperatorLeft("Join Map")
 
 MapList = {
-    "Planet Namak",
-    "Send Village",
-    "Double Dungean"
+    "Story",
+    "Legeng Stage"
 }
 
-
-Main:AddDropdownLeft("Select Map",MapList,_G.SaveSrttings.Map_Select,function(a)
+Main:AddDropdownLeft("Select Map", MapList, _G.SaveSrttings.Map_Select, function(a)
     Map_Select = a
     _G.SaveSrttings.Map_Select = Map_Select
-    if _G.SaveSrttings.Map_Select == "Planet Namak" then
-        Map_Select_Use = "1"
-	end
-    if _G.SaveSrttings.Map_Select == "Send Village" then
-        Map_Select_Use = "2"
-	end
-    if _G.SaveSrttings.Map_Select == "Double Dungean" then
-        Map_Select_Use = "3"
-    end
-	print(""..Map_Select_Use)
+    SaveSetting()
+end)
+
+Stagelist = {
+	"1",
+	"2",
+	"3"
+}
+
+Main:AddDropdownLeft("Select Stage", Stagelist ,_G.SaveSrttings.Stage_Select,function(a)
+	Stage_Select = a
+	_G.SaveSrttings.Stage_Select = Stage_Select
 	SaveSetting()
 end)
 
@@ -2908,16 +2903,18 @@ ActList = {
     "Infinite"
 }
 
+
 Main:AddDropdownLeft('Select Act',ActList,_G.SaveSrttings.Act_Select,function(a)
     Act_Select = a
     _G.SaveSrttings.Act_Select = Act_Select
     SaveSetting()
 end)
+
     ModeList = {
         "Normal",
         "Nightmare"
     }
-
+    
     Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSrttings.Mode_Select,function(a)
     Mode_Select = a
     _G.SaveSrttings.Mode_Select = Mode_Select
@@ -2935,6 +2932,7 @@ spawn(function()
         pcall(function()
             if Auto_Join then
                 if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == false then
+					game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Start")
                 for i,v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do
                   if v.Name == "Lobby" then
                     if v.LobbyBanner.Banner.Main.ChoosingStage.Main.ActName.Text == "Choosing..." then
@@ -2942,13 +2940,13 @@ spawn(function()
                            local args = {
                               [1] = "Confirm",
                               [2] = {
-                                [1] = "Story",
-                                [2] = "Stage"..Map_Select_Use,
-                                [3] = "Act"..Act_Select,
-                                [4] = Mode_Select,
+                                [1] = _G.SaveSrttings.Map_Select,
+                                [2] = "Stage".._G.SeveSrttings.Stage_Select,
+                                [3] = "Act".._G.SaveSrttings.Act_Select,
+                                [4] = _G.SaveSrttings.Mode_Select,
                                 [5] = 4,
                                 [6] = 0,
-                                [7] = Auto_Frind_Only
+                                [7] = _G.SaveSrttings.Auto_Frind_Only
                                     }
                                         }
                 
@@ -2956,8 +2954,6 @@ spawn(function()
                   end
               end
             end
-        elseif game:GetService("Players").localPlayer.PlayerGui:FindFirstChild("MiniLobbyInterface").Holder.Visible == true then
-            game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Start")
         end
         end
         end)
@@ -3007,5 +3003,60 @@ spawn(function()
     end
 end)
 
-loadcheck()
-LoadSetting()
+Main:AddSeperatorRight("Misc Function")
+Main:AddToggleRight("White Screen [Reduce GPU]",_G.SaveSrttings.White_Screen,function(a)
+	White_Screen = a
+	_G.SaveSrttings.White_Screen = White_Screen
+	if _G.SaveSrttings.White_Screen == true then
+		game:GetService("RunService"):Set3dRenderingEnabled(false)
+	elseif _G.SaveSrttings.White_Screen == false then
+		game:GetService("RunService"):Set3dRenderingEnabled(true)
+	end
+	SaveSetting()
+end)
+
+--------------------------------------------------------------------- Dev function
+
+Setting:AddToggleLeft("สร้างมาชั้วคราว",_G.SeveSrttings.Beta,function(a)
+	Bata = a 
+	_G.SeveSrttings.Beta = Beta
+	SaveSetting()
+end)
+
+spawn(function()
+	while wait() do
+		pcall(function()
+			if Beta then
+				for i,v in pairs(game:GetService("Workspace").Units:GetChildren()) do
+					if not v then
+						local args = {
+							[1] = "Render",
+							[2] = {
+								[1] = "Kinaru",
+								[2] = 13,
+								[3] = Vector3.new(135.58920288085938, 8.617912292480469, 120.07411193847656),
+								[4] = 0
+							}
+						}
+						
+						game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer(unpack(args))
+					end
+				end
+			end
+		end)
+	end
+end)
+
+spawn(function()
+	while wait() do
+		pcall(function()
+			if Beta then
+				for i,r in pairs(game:GetService("Workspace").Units:GetChildren()) do
+					if r then
+						Upgrade(r.Name)
+					end
+				end
+			end
+		end)
+	end
+end)

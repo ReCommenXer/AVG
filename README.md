@@ -3064,15 +3064,26 @@ spawn(function()
 				-- ตรวจสอบว่ามี unit ใน Workspace หรือไม่
 				if #units > 0 then
 					for a,r in pairs(units) do
-						print("Upgrading unit: " .. r.Name)  -- เพิ่มข้อความแจ้งเตือน
 						
 						-- เรียกฟังก์ชันอัพเกรด
 						Upgrade(r.Name)
 					end
-				else
-					print("No units to upgrade") -- เพิ่มข้อความแจ้งเตือนกรณีไม่มี unit
 				end
 			end
 		end)
 	end
 end)
+
+spawn(function()
+	while wait() do
+		pcall(function()
+			if Beta then
+				if game:GetService("Players").localPlayer.PlayerGui.SkipWave.Enabled == true then
+					game:GetService("ReplicatedStorage").Networking.SkipWaveEvent:FireServer("Skip")
+				end
+			end
+		end)
+	end
+end)
+
+

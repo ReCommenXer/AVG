@@ -3035,20 +3035,18 @@ spawn(function()
 	while wait() do
 		pcall(function()
 			if Beta then
-				for i,v in pairs(game:GetService("Workspace").Units:GetChildren()) do
-					if not v.Parent then
-						local args = {
-							[1] = "Render",
-							[2] = {
-								[1] = "Kinaru",
-								[2] = 13,
-								[3] = Vector3.new(135.58920288085938, 8.617912292480469, 120.07411193847656),
-								[4] = 0
-							}
+				local units = game:GetService("Workspace").Units:GetChildren()
+				if #units == 0 then
+					local args = {
+						[1] = "Render",
+						[2] = {
+							[1] = "Kinaru",
+							[2] = 13,
+							[3] = Vector3.new(135.58920288085938, 8.617912292480469, 120.07411193847656),
+							[4] = 0
 						}
-						
-						game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer(unpack(args))
-					end
+					}
+					game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer(unpack(args))
 				end
 			end
 		end)
@@ -3059,8 +3057,18 @@ spawn(function()
 	while wait() do
 		pcall(function()
 			if Beta then
-				for a,r in pairs(game:GetService("Workspace").Units:GetChildren()) do
+				local units = game:GetService("Workspace").Units:GetChildren()
+				
+				-- ตรวจสอบว่ามี unit ใน Workspace หรือไม่
+				if #units > 0 then
+					for a,r in pairs(units) do
+						print("Upgrading unit: " .. r.Name)  -- เพิ่มข้อความแจ้งเตือน
+						
+						-- เรียกฟังก์ชันอัพเกรด
 						Upgrade(r.Name)
+					end
+				else
+					print("No units to upgrade") -- เพิ่มข้อความแจ้งเตือนกรณีไม่มี unit
 				end
 			end
 		end)

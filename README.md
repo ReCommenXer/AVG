@@ -8,7 +8,7 @@ function loadcheck()
     end
     pcall(function()
         _G.SaveSettings = {
-            Map_Select = "",Act_Select = "",Mode_Select = "",Auto_Join = false,Auto_Frind_Only = false,Auto_Next = false,Auto_Retry = false,Auto_Lobby = false
+            Map_Select = "",Act_Select = "",Mode_Select = "",Stage_Select = "",Auto_Join = false,Auto_Frind_Only = false,Auto_Next = false,Auto_Retry = false,Auto_Lobby = false,White_Screen = false,Beta = false
         }
     end)
     function LoadSetting()
@@ -2991,11 +2991,19 @@ spawn(function()
                 if game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == true and game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == true then
                     if Auto_Next == true then
                         game:GetService("ReplicatedStorage").Networking.EndScreen.VoteEvent:FireServer("Next")
-                    elseif Auto_Retry == true then
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == false
+						wait(1)
+					elseif Auto_Retry == true then
                         game:GetService("ReplicatedStorage").Networking.EndScreen.VoteEvent:FireServer("Retry")
-                    elseif Auto_Lobby == true then
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == false
+						wait(1)
+					elseif Auto_Lobby == true then
                         game:GetService("ReplicatedStorage").Networking.TeleportEvent:FireServer("Lobby")
-
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == false
+						wait(1)
                     end
                 end
             end
@@ -3028,7 +3036,7 @@ spawn(function()
 		pcall(function()
 			if Beta then
 				for i,v in pairs(game:GetService("Workspace").Units:GetChildren()) do
-					if not v then
+					if not v.Parent then
 						local args = {
 							[1] = "Render",
 							[2] = {
@@ -3051,10 +3059,8 @@ spawn(function()
 	while wait() do
 		pcall(function()
 			if Beta then
-				for i,r in pairs(game:GetService("Workspace").Units:GetChildren()) do
-					if r then
+				for a,r in pairs(game:GetService("Workspace").Units:GetChildren()) do
 						Upgrade(r.Name)
-					end
 				end
 			end
 		end)

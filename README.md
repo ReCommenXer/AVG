@@ -2936,6 +2936,7 @@ spawn(function()
                 for i,v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do
                   if v.Name == "Lobby" then
                     if v.LobbyBanner.Banner.Main.ChoosingStage.Main.ActName.Text == "Choosing..." then
+						if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == true then
                         Tp(v.CollisionPart.CFrame)
                            local args = {
                               [1] = "Confirm",
@@ -2951,6 +2952,7 @@ spawn(function()
                                         }
                 
                              game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
+									end
                   end
               end
             end
@@ -3026,7 +3028,7 @@ end)
 --------------------------------------------------------------------- Dev function
 
 Setting:AddToggleLeft("สร้างมาชั้วคราว",_G.SaveSettings.Beta,function(a)
-	Bata = a 
+	Beta = a 
 	_G.SaveSettings.Beta = Beta
 	SaveSetting()
 end)

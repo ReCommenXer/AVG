@@ -2,12 +2,12 @@
 function loadcheck()
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then
     else
-    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
+    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json",game:GetService("HttpService"):JSONEncode(_G.SaveSettings))
     return
     end
     end
     pcall(function()
-        _G.SaveSrttings = {
+        _G.SaveSettings = {
             Map_Select = "",Act_Select = "",Mode_Select = "",Auto_Join = false,Auto_Frind_Only = false,Auto_Next = false,Auto_Retry = false,Auto_Lobby = false
         }
     end)
@@ -23,7 +23,7 @@ function loadcheck()
             end)
             
             if success then
-                _G.SaveSrttings = decoded
+                _G.SaveSettings = decoded
             else
             end
         else
@@ -33,7 +33,7 @@ function loadcheck()
     function SaveSetting()
 
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then
-    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json",game:GetService("HttpService"):JSONEncode(_G.SaveSrttings))
+    writefile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json",game:GetService("HttpService"):JSONEncode(_G.SaveSettings))
     else
     loadcheck()
     end
@@ -2875,9 +2875,9 @@ MapList = {
     "Legeng Stage"
 }
 
-Main:AddDropdownLeft("Select Map", MapList, _G.SaveSrttings.Map_Select, function(a)
+Main:AddDropdownLeft("Select Map", MapList, _G.SaveSettings.Map_Select, function(a)
     Map_Select = a
-    _G.SaveSrttings.Map_Select = Map_Select
+    _G.SaveSettings.Map_Select = Map_Select
     SaveSetting()
 end)
 
@@ -2887,9 +2887,9 @@ Stagelist = {
 	"3"
 }
 
-Main:AddDropdownLeft("Select Stage", Stagelist ,_G.SaveSrttings.Stage_Select,function(a)
+Main:AddDropdownLeft("Select Stage", Stagelist ,_G.SaveSettings.Stage_Select,function(a)
 	Stage_Select = a
-	_G.SaveSrttings.Stage_Select = Stage_Select
+	_G.SaveSettings.Stage_Select = Stage_Select
 	SaveSetting()
 end)
 
@@ -2904,9 +2904,9 @@ ActList = {
 }
 
 
-Main:AddDropdownLeft('Select Act',ActList,_G.SaveSrttings.Act_Select,function(a)
+Main:AddDropdownLeft('Select Act',ActList,_G.SaveSettings.Act_Select,function(a)
     Act_Select = a
-    _G.SaveSrttings.Act_Select = Act_Select
+    _G.SaveSettings.Act_Select = Act_Select
     SaveSetting()
 end)
 
@@ -2915,15 +2915,15 @@ end)
         "Nightmare"
     }
     
-    Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSrttings.Mode_Select,function(a)
+    Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSettings.Mode_Select,function(a)
     Mode_Select = a
-    _G.SaveSrttings.Mode_Select = Mode_Select
+    _G.SaveSettings.Mode_Select = Mode_Select
     SaveSetting()
 end)
 
-Main:AddToggleLeft("Auto Join",_G.SaveSrttings.Auto_Join,function(a)
+Main:AddToggleLeft("Auto Join",_G.SaveSettings.Auto_Join,function(a)
     Auto_Join = a
-    _G.SaveSrttings.Auto_Join = Auto_Join
+    _G.SaveSettings.Auto_Join = Auto_Join
     SaveSetting()
 end)
 
@@ -2940,13 +2940,13 @@ spawn(function()
                            local args = {
                               [1] = "Confirm",
                               [2] = {
-                                [1] = _G.SaveSrttings.Map_Select,
-                                [2] = "Stage".._G.SeveSrttings.Stage_Select,
-                                [3] = "Act".._G.SaveSrttings.Act_Select,
-                                [4] = _G.SaveSrttings.Mode_Select,
+                                [1] = _G.SaveSettings.Map_Select,
+                                [2] = "Stage".._G.SaveSettings.Stage_Select,
+                                [3] = "Act".._G.SaveSettings.Act_Select,
+                                [4] = _G.SaveSettings.Mode_Select,
                                 [5] = 4,
                                 [6] = 0,
-                                [7] = _G.SaveSrttings.Auto_Frind_Only
+                                [7] = _G.SaveSettings.Auto_Frind_Only
                                     }
                                         }
                 
@@ -2960,27 +2960,27 @@ spawn(function()
     end
 end)
 
-Main:AddToggleLeft("Auto Frind Only",_G.SaveSrttings.Auto_Frind_Only ,function(a)
+Main:AddToggleLeft("Auto Frind Only",_G.SaveSettings.Auto_Frind_Only ,function(a)
     Auto_Frind_Only = a
-    _G.SaveSrttings.Auto_Frind_Only = Auto_Frind_Only
+    _G.SaveSettings.Auto_Frind_Only = Auto_Frind_Only
     SaveSetting()
 end)
 
 -------------------------------------------------- Main Right
 Main:AddSeperatorRight("Game Function")
-Main:AddToggleRight("Auto Next",_G.SaveSrttings.Auto_Next,function(a)
+Main:AddToggleRight("Auto Next",_G.SaveSettings.Auto_Next,function(a)
     Auto_Next = a
-    _G.SaveSrttings.Auto_Next = Auto_Next
+    _G.SaveSettings.Auto_Next = Auto_Next
     SaveSetting()
 end)
-Main:AddToggleRight("Auto Retry", _G.SaveSrttings.Auto_Retry,function(a)
+Main:AddToggleRight("Auto Retry", _G.SaveSettings.Auto_Retry,function(a)
     Auto_Retry = a
-    _G.SaveSrttings.Auto_Retry = Auto_Retry
+    _G.SaveSettings.Auto_Retry = Auto_Retry
     SaveSetting()
 end)
-Main:AddToggleRight("Auto Lobby",_G.SaveSrttings.Auto_Lobby,function(a)
+Main:AddToggleRight("Auto Lobby",_G.SaveSettings.Auto_Lobby,function(a)
     Auto_Lobby = a
-    _G.SaveSrttings.Auto_Lobby = Auto_Lobby
+    _G.SaveSettings.Auto_Lobby = Auto_Lobby
     SaveSetting()
 end)
 
@@ -3004,22 +3004,22 @@ spawn(function()
 end)
 
 Main:AddSeperatorRight("Misc Function")
-Main:AddToggleRight("White Screen [Reduce GPU]",_G.SaveSrttings.White_Screen,function(a)
+Main:AddToggleRight("White Screen [Reduce GPU]",_G.SaveSettings.White_Screen,function(a)
 	White_Screen = a
-	_G.SaveSrttings.White_Screen = White_Screen
-	if _G.SaveSrttings.White_Screen == true then
+	_G.SaveSettings.White_Screen = White_Screen
+	SaveSetting()
+	if _G.SaveSettings.White_Screen == true then
 		game:GetService("RunService"):Set3dRenderingEnabled(false)
-	elseif _G.SaveSrttings.White_Screen == false then
+	elseif _G.SaveSettings.White_Screen == false then
 		game:GetService("RunService"):Set3dRenderingEnabled(true)
 	end
-	SaveSetting()
 end)
 
 --------------------------------------------------------------------- Dev function
 
-Setting:AddToggleLeft("สร้างมาชั้วคราว",_G.SeveSrttings.Beta,function(a)
+Setting:AddToggleLeft("สร้างมาชั้วคราว",_G.SaveSettings.Beta,function(a)
 	Bata = a 
-	_G.SeveSrttings.Beta = Beta
+	_G.SaveSettings.Beta = Beta
 	SaveSetting()
 end)
 

@@ -2881,20 +2881,24 @@ MapList = {
     "Send Village",
     "Double Dungean"
 }
-Map_Select = _G.SaveSrttings.Map_Select or "Planet Namak"
+
 
 Main:AddDropdownLeft("Select Map",MapList,_G.SaveSrttings.Map_Select,function(a)
     Map_Select = a
     _G.SaveSrttings.Map_Select = Map_Select
-    SaveSetting()
-    if Map_Select == "Planet Namak" then
+    if _G.SaveSrttings.Map_Select == "Planet Namak" then
         Map_Select_Use = "1"
-    elseif Map_Select == "Send Village" then
+	end
+    if _G.SaveSrttings.Map_Select == "Send Village" then
         Map_Select_Use = "2"
-    elseif Map_Select == "Double Dungean" then
+	end
+    if _G.SaveSrttings.Map_Select == "Double Dungean" then
         Map_Select_Use = "3"
     end
+	print(""..Map_Select_Use)
+	SaveSetting()
 end)
+
 ActList = {
     "1",
     "2",
@@ -2905,8 +2909,6 @@ ActList = {
     "Infinite"
 }
 
-Act_Select = _G.SaveSrttings.Act_Select or "1"
-
 Main:AddDropdownLeft('Select Act',ActList,_G.SaveSrttings.Act_Select,function(a)
     Act_Select = a
     _G.SaveSrttings.Act_Select = Act_Select
@@ -2916,9 +2918,6 @@ end)
         "Normal",
         "Nightmare"
     }
-
-   -- หลังจากโหลดการตั้งค่า
-Mode_Select = _G.SaveSrttings.Mode_Select or "Normal" -- ใช้ค่า "Normal" ถ้า Mode_Select เป็น nil
 
     Main:AddDropdownLeft('Select Mode',ModeList,_G.SaveSrttings.Mode_Select,function(a)
     Mode_Select = a

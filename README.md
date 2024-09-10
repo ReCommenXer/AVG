@@ -2991,18 +2991,18 @@ spawn(function()
                 if game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == true and game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == true then
                     if Auto_Next == true then
                         game:GetService("ReplicatedStorage").Networking.EndScreen.VoteEvent:FireServer("Next")
-						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == false
-						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible = false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible = false
 						wait(1)
 					elseif Auto_Retry == true then
                         game:GetService("ReplicatedStorage").Networking.EndScreen.VoteEvent:FireServer("Retry")
-						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == false
-						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible = false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible = false
 						wait(1)
 					elseif Auto_Lobby == true then
                         game:GetService("ReplicatedStorage").Networking.TeleportEvent:FireServer("Lobby")
-						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible == false
-						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible == false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Container.Visible = false
+						game:GetService("Players").localPlayer.PlayerGui.EndScreen.Background.Visible = false
 						wait(1)
                     end
                 end

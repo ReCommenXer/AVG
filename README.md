@@ -3066,7 +3066,7 @@ spawn(function()
 			if Beta then
 				local units = game:GetService("Workspace").Units:GetChildren()
 				if #units == 0 then
-					PlaceUnit("Kinaru",135.58920288085938, 8.617912292480469, 120.07411193847656)
+					PlaceUnit(Kinaru,135.58920288085938, 8.617912292480469, 120.07411193847656)
 				end
 			end
 		end)

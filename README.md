@@ -1,7 +1,7 @@
 repeat wait() until game:IsLoaded()
 repeat wait() until game:GetService("Players")
 
-
+wait(5)
 ----------------------------------- save
 function loadcheck()
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then

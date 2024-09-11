@@ -2849,7 +2849,22 @@ function Tp(Pos)
         game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Upgrade", CodeName)
     end
 
+function SelectMapJoin(Map,Stage,Act,Mode,FrindOnly)
+	game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(
+                                        "Confirm",
+                                        Map,
+                                        "Stage" .. Stage,
+                                        "Act" .. Act,
+                                        Mode,
+                                        4,
+                                        0,
+                                        FrindOnly
+                                    )
+end
 
+function PlaceUnit(NameUnit,CFrameUnit)
+	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {""..NameUnit, 13, Vector3.new(CFrameUnit), 0})
+end
 ----------------------------- Ui Set
 local RenUi = Update:AddWindow("RebornXer Hub","10039618734",Enum.KeyCode.RightControl)
 
@@ -2928,36 +2943,23 @@ Main:AddToggleLeft("Auto Join",_G.SaveSettings.Auto_Join,function(a)
 end)
 
 spawn(function()
-    while wait(1) do
+    while wait(0.4) do
         pcall(function()
             if Auto_Join then
                 if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == false then
-					game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Start")
-                for i,v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do
-                  if v.Name == "Lobby" then
-                    if v.LobbyBanner.Banner.Main.ChoosingStage.Main.ActName.Text == "Choosing..." then
-						if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == true then
-                        Tp(v.CollisionPart.CFrame)
-                           local args = {
-                              [1] = "Confirm",
-                              [2] = {
-                                [1] = _G.SaveSettings.Map_Select,
-                                [2] = "Stage".._G.SaveSettings.Stage_Select,
-                                [3] = "Act".._G.SaveSettings.Act_Select,
-                                [4] = _G.SaveSettings.Mode_Select,
-                                [5] = 4,
-                                [6] = 0,
-                                [7] = _G.SaveSettings.Auto_Frind_Only
-                                    }
-                                        }
-                
-                             game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(unpack(args))
-									end
-                  end
-              end
+                    game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Start")
+                    for _, v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do
+                        if v.Name == "Lobby" then
+                            if v.LobbyBanner.Banner.Main.ChoosingStage.Main.ActName.Text == "Choosing..." then
+                                Tp(v.CollisionPart.CFrame)
+							else
+								SelectMapJoin(_G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Frind_Only)
+                                end
+                            end
+                        end
+                    end
+                end
             end
-        end
-        end
         end)
     end
 end)
@@ -3065,16 +3067,7 @@ spawn(function()
 			if Beta then
 				local units = game:GetService("Workspace").Units:GetChildren()
 				if #units == 0 then
-					local args = {
-						[1] = "Render",
-						[2] = {
-							[1] = "Kinaru",
-							[2] = 13,
-							[3] = Vector3.new(135.58920288085938, 8.617912292480469, 120.07411193847656),
-							[4] = 0
-						}
-					}
-					game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer(unpack(args))
+					PlaceUnit(Kinaru,135.58920288085938, 8.617912292480469, 120.07411193847656)
 				end
 			end
 		end)

@@ -2861,7 +2861,7 @@ function Tp(Pos)
     end
 
 function SelectMapJoin(Map,Stage,Act,Mode,FriendOnly)
-	game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Confirm", Map, "Stage" .. Stage, "Act" .. Act, Mode, 4, 0, FriendOnly)
+	game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Confirm", {Map, "Stage" .. Stage, "Act" .. Act, Mode, 4, 0, FriendOnly})
 
 end
 

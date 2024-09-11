@@ -2839,17 +2839,6 @@ end
 
 ------------------------------------ Function -------------------------------
 
-spawn(function()
-	while wait() do
-		pcall(function()
-			if game.PlaceId == "16277809958" then
-				game:GetService("TeleportService"):TeleportToPlaceInstance(16277809958)
-			end
-		end)
-	end
-end)
-
-
 function Tp(Pos)
     local NamePlayer = game.Players.LocalPlayer.Name
      local NamePlayer = game.workspace.Characters:FindFirstChild(NamePlayer)
@@ -2865,8 +2854,9 @@ function SelectMapJoin(Map,Stage,Act,Mode,FriendOnly)
 
 end
 
-function PlaceUnit(NameUnit,CFrameUnit)
-	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {""..NameUnit, 13, Vector3.new(CFrameUnit), 0})
+function PlaceUnit(NameUnit, x, y, z)
+	local Vector3Unit = Vector3.new(x, y, z)
+	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {NameUnit, 13, Vector3Unit, 0})
 end
 ----------------------------- Ui Set
 local RenUi = Update:AddWindow("RebornXer Hub","10039618734",Enum.KeyCode.RightControl)
@@ -3061,14 +3051,16 @@ Setting:AddToggleLeft("สร้างมาชั้วคราว",_G.SaveSet
 	_G.SaveSettings.Beta = Beta
 	SaveSetting()
 end)
-
+function PlaceUnit(NameUnit,CFrameUnit)
+	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {""..NameUnit, 13, Vector3.new(CFrameUnit), 0})
+end
 spawn(function()
 	while wait() do
 		pcall(function()
 			if Beta then
 				local units = game:GetService("Workspace").Units:GetChildren()
 				if #units == 0 then
-					PlaceUnit(Kinaru,135.58920288085938, 8.617912292480469, 120.07411193847656)
+					PlaceUnit("Kinaru",135.58920288085938, 8.617912292480469, 120.07411193847656)
 				end
 			end
 		end)

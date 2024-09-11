@@ -3103,5 +3103,9 @@ spawn(function()
 		end)
 	end
 end)
+Setting:AddSeperatorRight("Dev Function")
+Setting:AddButtonRight("Copy PlaceId"function()
+	setclipboard(tostring(game.PlaceId))
+end)
 
 

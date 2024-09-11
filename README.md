@@ -2954,7 +2954,7 @@ spawn(function()
                                 Tp(v.CollisionPart.CFrame)
 							else
 								SelectMapJoin(_G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Frind_Only)
-                                end
+                                
                             end
                         end
                     end

@@ -2863,7 +2863,7 @@ function SelectMapJoin(Map,Stage,Act,Mode,FrindOnly)
 end
 
 function PlaceUnit(NameUnit,CFrameUnit)
-	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {""..NameUnit, 13, Vector3.new(CFrameUnit), 0})
+	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {NameUnit, 13, Vector3.new(tostring(CFrameUnit)), 0})
 end
 ----------------------------- Ui Set
 local RenUi = Update:AddWindow("RebornXer Hub","10039618734",Enum.KeyCode.RightControl)
@@ -2954,7 +2954,6 @@ spawn(function()
                                 Tp(v.CollisionPart.CFrame)
 							else
 								SelectMapJoin(_G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Frind_Only)
-                                
                             end
                         end
                     end
@@ -3067,7 +3066,7 @@ spawn(function()
 			if Beta then
 				local units = game:GetService("Workspace").Units:GetChildren()
 				if #units == 0 then
-					PlaceUnit(Kinaru,135.58920288085938, 8.617912292480469, 120.07411193847656)
+					PlaceUnit("Kinaru",135.58920288085938, 8.617912292480469, 120.07411193847656)
 				end
 			end
 		end)

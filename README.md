@@ -1,3 +1,7 @@
+repeat wait() until game:IsLoaded()
+repeat wait() until game:GetService("Players")
+
+
 ----------------------------------- save
 function loadcheck()
     if isfile("RebornXer Hub Anime Vanguards"..game.Players.LocalPlayer.Name..".json") then
@@ -2855,7 +2859,7 @@ function SelectMapJoin(Map,Stage,Act,Mode,FriendOnly)
 end
 
 function PlaceUnit(NameUnit,Vector3Unit)
-	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {NameUnit, 13, Vector3Unit, 0})
+	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {NameUnit, 13, Vector3.new(Vector3Unit), 0})
 end
 ----------------------------- Ui Set
 local RenUi = Update:AddWindow("RebornXer Hub","10039618734",Enum.KeyCode.RightControl)
@@ -3060,6 +3064,7 @@ spawn(function()
 				local units = game:GetService("Workspace").Units:GetChildren()
 				if #units == 0 then
 					PlaceUnit("Kinaru",135.58920288085938, 8.617912292480469, 120.07411193847656)
+					print(PlaceUnit())
 				end
 			end
 		end)

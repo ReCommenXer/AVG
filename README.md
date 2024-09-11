@@ -2946,14 +2946,13 @@ spawn(function()
     while wait(0.4) do
         pcall(function()
             if Auto_Join then
+				SelectMapJoin(_G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Frind_Only)
                 if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == false then
                     game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Start")
                     for _, v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do
                         if v.Name == "Lobby" then
                             if v.LobbyBanner.Banner.Main.ChoosingStage.Main.ActName.Text == "Choosing..." then
                                 Tp(v.CollisionPart.CFrame)
-							else
-								SelectMapJoin(_G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Frind_Only)
                             end
                         end
                     end

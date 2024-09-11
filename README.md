@@ -3039,6 +3039,7 @@ for _, obj in pairs(map:GetChildren()) do
     if not obj:IsA("SpawnLocation") then
         obj:Destroy()
 		map.SpawnLocation.CanCollide = true
+		_G.SaveSettings.Remove_Map = false
     end
 end
 end
@@ -3054,17 +3055,24 @@ Setting:AddToggleLeft("สร้างมาชั้วคราว",_G.SaveSet
 	_G.SaveSettings.Beta = Beta
 	SaveSetting()
 end)
-function PlaceUnit(NameUnit,CFrameUnit)
-	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {""..NameUnit, 13, Vector3.new(CFrameUnit), 0})
-end
+
 spawn(function()
 	while wait() do
 		pcall(function()
 			if Beta then
 				local units = game:GetService("Workspace").Units:GetChildren()
 				if #units == 0 then
-					PlaceUnit("Kinaru",135.58920288085938, 8.617912292480469, 120.07411193847656)
-					print(PlaceUnit())
+					local args = {
+						[1] = "Render",
+						[2] = {
+							[1] = "Kinaru",
+							[2] = 13,
+							[3] = Vector3.new(135.58920288085938, 8.617912292480469, 120.07411193847656),
+							[4] = 0
+						}
+					}
+					
+					game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer(unpack(args))
 				end
 			end
 		end)

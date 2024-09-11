@@ -2854,8 +2854,7 @@ function SelectMapJoin(Map,Stage,Act,Mode,FriendOnly)
 
 end
 
-function PlaceUnit(NameUnit, x, y, z)
-	local Vector3Unit = Vector3.new(x, y, z)
+function PlaceUnit(NameUnit,Vector3Unit)
 	game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Render", {NameUnit, 13, Vector3Unit, 0})
 end
 ----------------------------- Ui Set

@@ -2950,7 +2950,6 @@ spawn(function()
         pcall(function()
             if Auto_Join then
 				SelectMapJoin(_G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Friend_Only)
-				print("SelectMapJoin: " .. _G.SaveSettings.Map_Select .. ", " .. _G.SaveSettings.Stage_Select .. ", " .. _G.SaveSettings.Act_Select .. ", " .. _G.SaveSettings.Mode_Select .. ", " .. tostring(_G.SaveSettings.Auto_Friend_Only))
 				if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == false then
                     game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Start")
                     for _, v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do

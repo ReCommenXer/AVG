@@ -8,7 +8,7 @@ function loadcheck()
     end
     pcall(function()
         _G.SaveSettings = {
-            Map_Select = "",Act_Select = "",Mode_Select = "",Stage_Select = "",Auto_Join = false,Auto_Frind_Only = false,Auto_Next = false,Auto_Retry = false,Auto_Lobby = false,White_Screen = false,Beta = false
+            Map_Select = "",Act_Select = "",Mode_Select = "",Stage_Select = "",Auto_Join = false,Auto_Friend_Only = false,Auto_Next = false,Auto_Retry = false,Auto_Lobby = false,White_Screen = false,Beta = false
         }
     end)
     function LoadSetting()
@@ -2839,6 +2839,17 @@ end
 
 ------------------------------------ Function -------------------------------
 
+spawn(function()
+	while wait() do
+		pcall(function()
+			if game.PlaceId == "16277809958" then
+				game:GetService("TeleportService"):TeleportToPlaceInstance(16277809958)
+			end
+		end)
+	end
+end)
+
+
 function Tp(Pos)
     local NamePlayer = game.Players.LocalPlayer.Name
      local NamePlayer = game.workspace.Characters:FindFirstChild(NamePlayer)
@@ -2849,17 +2860,9 @@ function Tp(Pos)
         game:GetService("ReplicatedStorage").Networking.UnitEvent:FireServer("Upgrade", CodeName)
     end
 
-function SelectMapJoin(Map,Stage,Act,Mode,FrindOnly)
-	game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer(
-                                        "Confirm",
-                                        Map,
-                                        "Stage" .. Stage,
-                                        "Act" .. Act,
-                                        Mode,
-                                        4,
-                                        0,
-                                        FrindOnly
-                                    )
+function SelectMapJoin(Map,Stage,Act,Mode,FriendOnly)
+	game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Confirm", Map, "Stage" .. Stage, "Act" .. Act, Mode, 4, 0, FriendOnly)
+
 end
 
 function PlaceUnit(NameUnit,CFrameUnit)
@@ -2946,8 +2949,8 @@ spawn(function()
     while wait(0.4) do
         pcall(function()
             if Auto_Join then
-				SelectMapJoin(_G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Frind_Only)
-               print("SelectMapJoin".._G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Frind_Only)
+				SelectMapJoin(_G.SaveSettings.Map_Select,_G.SaveSettings.Stage_Select,_G.SaveSettings.Act_Select,_G.SaveSettings.Mode_Select,_G.SaveSettings.Auto_Friend_Only)
+				print("SelectMapJoin: " .. _G.SaveSettings.Map_Select .. ", " .. _G.SaveSettings.Stage_Select .. ", " .. _G.SaveSettings.Act_Select .. ", " .. _G.SaveSettings.Mode_Select .. ", " .. tostring(_G.SaveSettings.Auto_Friend_Only))
 				if game:GetService("Players").localPlayer.PlayerGui.Windows.Lobby.Holder.Visible == false then
                     game:GetService("ReplicatedStorage").Networking.LobbyEvent:FireServer("Start")
                     for _, v in pairs(game:GetService("Workspace").MainLobby.Lobby:GetChildren()) do
@@ -2963,9 +2966,9 @@ spawn(function()
     end
 end)
 
-Main:AddToggleLeft("Auto Frind Only",_G.SaveSettings.Auto_Frind_Only ,function(a)
-    Auto_Frind_Only = a
-    _G.SaveSettings.Auto_Frind_Only = Auto_Frind_Only
+Main:AddToggleLeft("Auto Friend Only",_G.SaveSettings.Auto_Friend_Only ,function(a)
+    Auto_Friend_Only = a
+    _G.SaveSettings.Auto_Friend_Only = Auto_Friend_Only
     SaveSetting()
 end)
 

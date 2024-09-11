@@ -12,7 +12,7 @@ function loadcheck()
     end
     pcall(function()
         _G.SaveSettings = {
-            Map_Select = "",Act_Select = "",Mode_Select = "",Stage_Select = "",Auto_Join = false,Auto_Friend_Only = false,Auto_Next = false,Auto_Retry = false,Auto_Lobby = false,White_Screen = false,Beta = false
+            Map_Select = "",Act_Select = "",Mode_Select = "",Stage_Select = "",Auto_Join = false,Auto_Friend_Only = false,Auto_Next = false,Auto_Retry = false,Auto_Lobby = false,White_Screen = false,Beta = false,Auto_Rejoin = false
         }
     end)
     function LoadSetting()
@@ -3047,7 +3047,26 @@ end)
 end
 end)
 	
+Main:AddToggleRight("Auto Rejoin",_G.SaveSettings.Auto_Rejoin,function(a)
+	Auto_Rejoin = a
+	_G.SaveSettings.Auto_Rejoin = Auto_Rejoin
+	SaveSetting()
+end)
 	
+
+spawn(function()
+    while true do wait()
+        getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(Kick)
+            if _G.SaveSettings.Auto_Rejoin then
+                if Kick.Name == 'ErrorPrompt' and Kick:FindFirstChild('MessageArea') and Kick.MessageArea:FindFirstChild("ErrorFrame") then
+                    game:GetService("TeleportService"):Teleport(game.PlaceId)
+                    wait(50)
+                end
+            end
+        end)
+    end
+end)
+
 	--------------------------------------------------------------------- Dev function
 
 Setting:AddToggleLeft("สร้างมาชั้วคราว",_G.SaveSettings.Beta,function(a)

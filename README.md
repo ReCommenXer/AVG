@@ -3059,7 +3059,7 @@ spawn(function()
         getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(Kick)
             if _G.SaveSettings.Auto_Rejoin then
                 if Kick.Name == 'ErrorPrompt' and Kick:FindFirstChild('MessageArea') and Kick.MessageArea:FindFirstChild("ErrorFrame") then
-                    game:GetService("TeleportService"):Teleport(game.PlaceId)
+                    game:GetService("TeleportService"):Teleport(16146832113)
                     wait(50)
                 end
             end

@@ -1434,7 +1434,7 @@ Truea.Name = "Truea"
 
 		
 		function main:AddDropdownLeft(droptitle, list, config, callback)
-local config = config or ""
+local config = config or "Select First"
 local dropfunc = {}
 local list = list or {}
 local DropToggled = false
@@ -1537,7 +1537,7 @@ DropTextList.BackgroundTransparency = 1.000
 DropTextList.Position = UDim2.new(0, 3, 0, 30)
 DropTextList.Size = UDim2.new(0, 278, 0, 25)
 DropTextList.Font = Enum.Font.Code
-DropTextList.Text = v or config or"Select First"
+DropTextList.Text = v or config or "Select First"
 DropTextList.TextColor3 = Color3.fromRGB(255,255,255)
 DropTextList.TextSize = 12.000
 DropTextList.TextXAlignment = Enum.TextXAlignment.Center
@@ -1678,7 +1678,7 @@ function dropfunc:Clear()
                             ItemCount = 0
                         end
                     end
-                    DropTextList.Text = "Reset Succesfully..."
+                    DropTextList.Text = "Reset Succesfully"
                     DropToggled = false
                     DropSizeFrame:TweenSize(UDim2.new(0, 278, 0, 60), 'InOut', 'Linear', 0.08)
                     Frame:TweenSize(UDim2.new(0, 278, 0, 60), 'InOut', 'Linear', 0.08)
@@ -1749,7 +1749,7 @@ end
 
 	function main:AddDropdownRight(droptitle, list,  config, callback1)
 -- Local --
-local config = config or ""
+local config = config or "Select First"
 local dropfunc1 = {}
 local list = list or {}
 local DropToggled1 = false
@@ -3132,5 +3132,4 @@ Setting:AddSeperatorRight("Dev Function")
 Setting:AddButtonRight("Copy PlaceId",function()
 	setclipboard(tostring(game.PlaceId))
 end)
-
 
